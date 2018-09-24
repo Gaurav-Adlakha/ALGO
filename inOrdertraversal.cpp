@@ -1,4 +1,4 @@
-
+/*
 #include <iostream>
 #include <unordered_map>
 #include <vector>
@@ -41,68 +41,34 @@ bool isLeaf(Node *node) {
 
 
 /*
-10
-8
+     10
+   8 
 7    9
-9.5
+       9.5
 
-*/
-
-void levelOrderTraversal(Node *root) {
-	queue<Node*> q1, q2;
-	q1.push(root);
-
-	while (!q1.empty() || !q2.empty()) {
-		while (!q1.empty()) {
-			Node *current = q1.front();
-			if (current->left != NULL) {
-				q2.push(current->left);
-			}
-			if (current->right != NULL) {
-				q2.push(current->right);
-			}
-			cout << current->key << endl;
-			q1.pop();
+*
+vector<int> inOrdertraversal(Node *root) {
+	vector<int> vector;
+	if (!root) return vector;
+	stack<Node *> stack;
+	stack.push(root);
+	while (!stack.empty())
+	{
+		Node *pNode = stack.top();
+		if (pNode->left)
+		{
+			stack.push(pNode->left);
+			pNode->left = NULL;
 		}
-
-		while (!q2.empty()) {
-			Node *current = q2.front();
-			if (current->left != NULL) {
-				q1.push(current->left);
-			}
-			if (current->right != NULL) {
-				q1.push(current->right);
-			}
-			cout << current->key << endl;
-			q2.pop();
+		else
+		{
+			vector.push_back(pNode->key);
+			stack.pop();
+			if (pNode->right)
+				stack.push(pNode->right);
 		}
 	}
-}
-
-void levelOrderTraversalWithDelimeter(Node *root) {
-	queue<Node*> q;
-	q.push(root);
-	q.push(NULL);
-
-	while (!q.empty()) {
-		Node *current = q.front();
-		q.pop();
-		if (current != NULL) {
-			if (current->left != NULL) {
-				q.push(current->left);
-			}
-			if (current->right != NULL) {
-				q.push(current->right);
-			}	
-			cout << current->key << " ";
-		}
-		else {
-			if (!q.empty()) {
-				q.push(NULL);
-			}
-		}
-		cout << endl;
-	}
+	 return vector;
 }
 
 
@@ -125,9 +91,8 @@ int main()
 	root->right->right->left->right = newNode(11);
 	root->right->right->left->right->right = newNode(12);
 
-	//levelOrderTraversal(root);
-
-	cout << "  *******************" << endl;
-	levelOrderTraversalWithDelimeter(root);
+	inOrdertraversal(root);
 	return 0;
 }
+
+*/
