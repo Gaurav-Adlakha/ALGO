@@ -1,4 +1,4 @@
-
+/*
 #include <iostream>
 #include <unordered_map>
 #include <vector>
@@ -40,13 +40,7 @@ bool isLeaf(Node *node) {
 }
 
 
-/*
-10
-8
-7    9
-9.5
 
-*/
 
 void levelOrderTraversal(Node *root) {
 	queue<Node*> q1, q2;
@@ -107,7 +101,38 @@ void levelOrderTraversalWithDelimeter(Node *root) {
 
 
 
-// Driver code
+void levelOrderTraversalCounter(Node *root) {
+	int currentCount, level, current=0;
+	queue<Node*> que;
+	que.push(root);
+	level = 1, currentCount = 0;
+
+	while (!que.empty()) 
+	{
+		while (level > 0) 
+		{
+			Node *top = que.front();
+			current = top->key;
+			cout << current << "  ";
+			que.pop();
+			if (top->left != NULL) {
+				currentCount = currentCount + 1;
+				que.push(top->left);
+			}
+			if (top->right != NULL) {
+				currentCount = currentCount + 1;
+				que.push(top->right);
+			}
+			level = level - 1;
+		}
+		cout << endl;
+		level = currentCount;
+		currentCount = 0;
+	}
+}
+
+
+
 int main()
 {
 
@@ -128,6 +153,8 @@ int main()
 	//levelOrderTraversal(root);
 
 	cout << "  *******************" << endl;
-	levelOrderTraversalWithDelimeter(root);
+	levelOrderTraversalCounter(root);
 	return 0;
 }
+
+*/
